@@ -234,11 +234,15 @@ public class MainController {
 
                 // Filtra os parâmetros com a Key fornecida
                 List<Parameter> matchingParameters = lap.getParameters().stream()
-                        .filter(param -> param.getKey().equals(key))
+                        .filter(p -> p.getKey().equals(key))
                         .collect(Collectors.toList());
+                List<ParameterResponse> response = matchingParameters.stream()
+                        .map(ParameterResponse::new)
+                        .collect(Collectors.toList());
+
                 if (!matchingParameters.isEmpty()) {
-                    System.out.println(matchingParameters.toString());
-                    return ResponseEntity.ok(matchingParameters);
+                    System.out.println(response.toString());
+                    return ResponseEntity.ok(response);
                 }
                 else return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body("Parameter with key [" + key + "] not found in this lap.");
@@ -250,7 +254,6 @@ public class MainController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
         }
     }
-
         /**
          * Endpoint para buscar todos os parâmetros de uma volta específica (Lap).
          *
