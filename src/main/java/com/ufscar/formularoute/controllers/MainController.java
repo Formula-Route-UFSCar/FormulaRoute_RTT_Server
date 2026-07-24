@@ -254,5 +254,10 @@ public class MainController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
         }
     }
-    
+
+    @GetMapping("/test")
+    public ResponseEntity test() {
+        System.out.println("TESTED!");
+        return ResponseEntity.ok("TESTING...");
+    }
 }
