@@ -1,10 +1,10 @@
-FROM eclipse-temurin:21-jdk AS build
+FROM eclipse-temurin:17-jdk AS build
 WORKDIR /app
 COPY . .
-RUN chmod +x gradlew && ./gradlew bootJar --no-daemon
+RUN chmod +x gradlew && ./gradlew installDist --no-daemon -x test
 
-FROM eclipse-temurin:21-jre
+FROM eclipse-temurin:17-jre
 WORKDIR /app
-COPY --from=build /app/build/libs/*.jar app.jar
+COPY --from=build /app/build/install/FormulaRoute_RTT_Server/lib ./lib
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java","-cp","/app/lib/*","com.ufscar.formularoute.Main"]
