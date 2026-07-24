@@ -1,11 +1,9 @@
 FROM eclipse-temurin:17-jdk AS build
 WORKDIR /app
 COPY . .
-RUN chmod +x gradlew && ./gradlew clean installDist --no-daemon -x test
-RUN echo "=== lib/ ===" && ls -1 build/install/FormulaRoute_RTT_Server/lib/
+RUN chmod +x gradlew && ./gradlew clean bootJar --no-daemon -x test
 
 FROM eclipse-temurin:17-jre
 WORKDIR /app
-COPY --from=build /app/build/install/FormulaRoute_RTT_Server ./
-RUN chmod +x bin/FormulaRoute_RTT_Server
-ENTRYPOINT ["./bin/FormulaRoute_RTT_Server"]
+COPY --from=build /app/build/libs/app.jar app.jar
+ENTRYPOINT ["java","-jar","app.jar"]
