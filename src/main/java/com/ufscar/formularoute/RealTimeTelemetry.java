@@ -15,7 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class RealTimeTelemetry extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-
+/*
         var root = new Interface();
         var antialiasing = Platform.isSupported(ConditionalFeature.EFFECT)
                 ? SceneAntialiasing.BALANCED
@@ -37,11 +37,11 @@ public class RealTimeTelemetry extends Application {
         });
 
         stage.setMaximized(true);
-        stage.show();
+        stage.show();*/
     }
 
     public static void main(String[] args){
         SpringApplication.run(RealTimeTelemetry.class, args);
-        launch(args);
+        //launch(args);
     }
 }
