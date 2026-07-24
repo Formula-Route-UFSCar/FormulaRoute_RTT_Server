@@ -8,4 +8,5 @@ import java.util.UUID;
 
 public interface LapRepository extends JpaRepository<Lap, UUID> {
     Optional<Lap> findByName(String name);
+    Lap findTopByOrderByIdDesc();
 }
